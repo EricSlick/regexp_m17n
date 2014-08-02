@@ -1,5 +1,5 @@
 module RegexpM17N
   def self.non_empty?(str)
-    str =~ /^.+$/
+    Regexp.new('^.+$'.encode(str.encoding)).match(str)
   end
 end
