@@ -1,6 +1,6 @@
 module RegexpM17N
   def self.non_empty?(str)
-    /^.+$/ =~ str
+    str =~ /^.+$/
   end
 
   def self.non_empty2?(str)
