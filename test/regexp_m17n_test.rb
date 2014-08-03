@@ -4,9 +4,12 @@ require_relative '../lib/regexp_m17n'
 
 class RegexpTest < MiniTest::Unit::TestCase
   def test_non_empty_string
+    default_encoding = Encoding.default_internal
     Encoding.list.each do |enc|
-      assert RegexpM17N.non_empty?('.'.encode(enc)) unless enc.dummy?
+      Encoding.default_internal = enc
+      assert RegexpM17N.non_empty?('.')
     end
+    Encoding.default_internal = default_encoding
   end
 
 end
