@@ -3,10 +3,13 @@ module RegexpM17N
     unless enc.dummy?
       Regexp.new('^.+$'.encode(enc)).match(str.encode(enc))
     else
-
-      if conv = Encoding::Converter.asciicompat_encoding(enc)
-        Regexp.new('^.+$'.encode(conv)).match(str.encode(conv))
-      else
+      begin
+        if conv = Encoding::Converter.asciicompat_encoding(enc)
+          Regexp.new('^.+$'.encode(conv)).match(str.encode(conv))
+        else
+          111
+        end
+      rescue Encoding::ConverterNotFoundError #jruby throws this instead of returning nil
         111
       end
     end
